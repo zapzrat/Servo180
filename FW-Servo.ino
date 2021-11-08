@@ -1,7 +1,7 @@
 #include <Servo.h>
 Servo myservo;
 
-const int buttonPin = 2;
+const int buttonPin = D5;
 int buttonState = 0;
 int oneClick = 0;
 int modeServo = 0;
@@ -9,23 +9,21 @@ int modeServo = 0;
 void setup() {
   pinMode(buttonPin, INPUT);
   Serial.begin(9600);
-  myservo.attach(9);
+  myservo.attach(D4);
   Serial.println("Start Project");
 }
 
 void loop() {
   buttonState = digitalRead(buttonPin);
   if (buttonState == HIGH) {
-    if (oneClick < 10 ) {
-      oneClick ++;
-    }
-    //    oneClick ++;
-    if (oneClick == 1) {
+    if (oneClick == 0 ) {
+      oneClick = 1;
+
       modeServo ++;
       if (modeServo > 2) {
         modeServo = 0;
       }
-      Serial.print("mode servo : ");Serial.println(modeServo);      
+      Serial.print("mode servo : "); Serial.println(modeServo);
     }
   }
   else if (buttonState == LOW) {
@@ -46,7 +44,7 @@ void loop() {
   }
 
 
-delay(10);
+  delay(10);
 
 
 }
